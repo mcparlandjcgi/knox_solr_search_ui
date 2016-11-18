@@ -27,7 +27,7 @@
 		<appender-ref ref="TIME_BASED_FILE" />
 	</logger>
 
-	<root level="WARN">
+	<root level="DEBUG">
 		<appender-ref ref="TIME_BASED_FILE" />
 	</root>
 
