@@ -1,0 +1,21 @@
+{
+  "name": "knox-solr-gui",
+  "authors": [
+    "Charles Chademana <charles.chademana@cgi.com>"
+  ],
+  "description": "GUI for Knox-Solr search facility",
+  "main": "",
+  "keywords": [
+    "knox",
+    "solr",
+    "angular"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5",
+    "bootstrap": "^3.3.7",
+    "angular-route": "^1.5.8"
+  }
+}
