@@ -1,16 +1,61 @@
-<html>
+<html ng-app="knoxSolrSearch">
   <head>
     <title>Knox Solr GUI</title>
-  </head>
-  <body>
 
-    <form ng-submit="searchSolr">
-      <label for="">
-      <input type="search" placeholder="Enter your query" />
-      <input type="submit" value="Search">
-    </form>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body ng-controller="SearchController as vm">
+
+    <div class="container">
+      <h1>Knox Solr Search</h1>
+
+      <form ng-submit="vm.searchSolr()">
+        <input type="search" placeholder="Enter your query" class="form-control" ng-model="vm.query"/><br />
+        <button type="submit" class="btn btn-primary btn-lg col-xs-12 col-sm-5">Search</button>
+        <button type="reset" class="btn btn-danger btn-lg col-xs-12 col-sm-5 pull-right" ng-click="vm.refresh()">Reset</button>
+      </form>
+
+      <div class="search_result">
+        <h2>Search Results</h2>
+        <div>
+          <ul>
+            <li ng-repeat="product in vm.products | filter: vm.q" class="panel panel-default">
+              <div class="panel-heading">{{product.name}}</div>
+              <div class="panel-body">
+                <ul>
+                  <li><label>ID:</label> {{product.id}}</li>
+                  <li><label>Manufacturer:</label> {{product.manu}}</li>
+                  <li><label>Manufacturer ID:</label> {{product.manu_id_s}}</li>
+                  <li><label>Category:</label>
+                    <ul>
+                      <li ng-repeat="cat in product.cat">
+                        <span>{{cat}}</span>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><label>Features:</label> {{product.features}}</li>
+                  <li><label>Author:</label> {{product.author}}</li>
+                  <li><label>Author T:</label> {{product.author_t}}</li>
+                  <li><label>Includes:</label> {{product.includes}}</li>
+                  <li><label>Weight:</label> {{product.weight}}</li>
+                  <li><label>Price:</label> {{product.price}}</li>
+                  <li><label>Price C:</label> {{product.price_c}}</li>
+                  <li><label>Popularity:</label> {{product.popularity}}</li>
+                  <li><label>In Stock:</label> {{product.inStock}}</li>
+                  <li><label>Store:</label> {{product.store}}</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      </div>
 
 
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
