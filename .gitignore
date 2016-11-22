@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+node_modules
+bower_components
+=======
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -28,3 +32,4 @@ nbdist/
 
 ## Application
 LOGDIR_IS_UNDEFINED
+>>>>>>> 0706bd7c2a05656510b8f8413948d25f3e390432
