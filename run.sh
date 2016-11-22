@@ -8,8 +8,8 @@ JAR=knox-solr-ui.jar
 if [[ 1 -eq ${#} ]];then
     PORT=${1}
     echo "Will run on port ${PORT}"
+    JVM_ARGS="-Dserver.port=${PORT}"
 fi
 
 # Run it
-java -DLOGDIR=${INSTALLDIR}/logs -jar ${INSTALLDIR}/${JAR}
-
+java -DLOGDIR=${INSTALLDIR}/logs ${JVM_ARGS} -jar ${INSTALLDIR}/${JAR}
