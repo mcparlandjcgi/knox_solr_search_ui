@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class KnoxSolrUiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KnoxSolrUiApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(KnoxSolrUiApplication.class, args);
+  }
 }
+
+

@@ -10,15 +10,12 @@
 	app.controller('FormSubmitController',[ '$scope', '$http', function($scope, $http) {
 			
 		$scope.list = [];
-			$scope.headerText = 'Submit Solr Query, providing the collection to search, and the query below.';
+			$scope.headerText = 'Query Solr through Knox';
 			$scope.submit = function() {
 				
-				var solrRequest = {
-						"solrCollection" : $scope.solrCollection,
-						"solrQuery" : $scope.solrQuery
-				};
+				var solrQuery = $scope.solrQuery;
 				
-				var response = $http.post('search', solrRequest);
+				var response = $http.get('search', {params: { solrQuery: solrQuery }});
 				response.success(function(data, status, headers, config) {
 					$scope.list.push(data);
 				});
@@ -36,7 +33,6 @@
 <body>
 	<form data-ng-submit="submit()" data-ng-controller="FormSubmitController">
 		<h3>{{headerText}}</h3>
-		<p>Collection: <input type="text" data-ng-model="solrCollection"></p>
 		<p>Query: <input type="text" data-ng-model="solrQuery"></p>
 		<input type="submit" id="submit" value="Submit" /><br>	
 		
