@@ -19,6 +19,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -32,7 +33,8 @@ import org.springframework.web.client.RestTemplate;
  *
  */
 @Configuration
-@PropertySources({@PropertySource("classpath:application.properties")})
+@PropertySources({@PropertySource("classpath:application.properties"),
+    @PropertySource("file:///usr/knox_solr_search_ui/override.properties")})
 public class SpringConfiguration {
 
   /**
@@ -98,7 +100,8 @@ public class SpringConfiguration {
   /**
    * @return get a rest template.
    */
-  @Bean
+  @Bean("sslRestTemplate")
+  @Primary
   public RestTemplate restTemplate() {
     CloseableHttpClient httpClient =
         HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build();

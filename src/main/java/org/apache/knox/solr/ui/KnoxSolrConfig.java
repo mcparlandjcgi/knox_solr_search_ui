@@ -35,7 +35,7 @@ public class KnoxSolrConfig {
   /**
    * The protocol.
    */
-  @Value("${config.protocol:http}")
+  @Value("${config.protocol}")
   private String protocol = null;
 
   /**
@@ -47,13 +47,13 @@ public class KnoxSolrConfig {
   /**
    * The port.
    */
-  @Value("${config.port:8443}")
+  @Value("${config.port}")
   private String port = null;
 
   /**
    * The solrContext.
    */
-  @Value("${config.solrContext:solr}")
+  @Value("${config.solrContext}")
   private String solrContext = null;
 
   /**
@@ -71,31 +71,31 @@ public class KnoxSolrConfig {
   /**
    * The knoxContext.
    */
-  @Value("${config.knoxContext:gateway}")
+  @Value("${config.knoxContext}")
   private String knoxContext = null;
 
   /**
    * The knoxTopology.
    */
-  @Value("${config.knoxTopology:sandbox}")
+  @Value("${config.knoxTopology}")
   private String knoxTopology = null;
 
   /**
    * The solrSearchCommand.
    */
-  @Value("${config.solrSearchCommand:search}")
+  @Value("${config.solrSearchCommand}")
   private String solrSearchCommand = null;
 
   /**
    * The solrCollection.
    */
-  @Value("${config.solrCollection:KnoxIntegrationConfig}")
+  @Value("${config.solrCollection}")
   private String solrCollection = null;
 
   /**
    * The solrFormat.
    */
-  @Value("${config.solrFormat:csv}")
+  @Value("${config.solrFormat}")
   private String solrFormat = null;
 
   /**

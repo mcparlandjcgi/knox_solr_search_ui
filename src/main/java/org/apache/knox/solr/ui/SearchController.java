@@ -21,6 +21,7 @@ import java.util.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -61,6 +62,7 @@ public class SearchController {
   /**
    * The restTemplate.
    */
+  @Qualifier("sslRestTemplate")
   @Autowired
   private RestTemplate restTemplate = null;
 
