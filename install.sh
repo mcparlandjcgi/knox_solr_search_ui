@@ -14,5 +14,6 @@ JAR=knox-solr-ui.jar
 find . -name ${JAR} -exec cp {} ${INSTALLDIR} \;
 
 cp run.sh ${INSTALLDIR}
-cp override.properties ${INSTALLDIR}
-
+if [[ ! -f ${INSTALLDIR}/override.properties ]];then
+    cp override.properties ${INSTALLDIR}
+fi

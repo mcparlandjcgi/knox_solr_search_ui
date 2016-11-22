@@ -31,6 +31,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -126,6 +127,7 @@ public class SearchController {
    * @param solrQuery the Solr query
    * @return the response
    */
+  @CrossOrigin(origins = "*")
   @RequestMapping("/search")
   public @ResponseBody String search(@RequestParam("solrQuery") String solrQuery) {
     logger.debug("Received Solr Query: {}", solrQuery);
