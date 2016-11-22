@@ -1,2 +1,35 @@
+<<<<<<< HEAD
 node_modules
 bower_components
+=======
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### Maven
+.mvn
+
+## Application
+LOGDIR_IS_UNDEFINED
+>>>>>>> 0706bd7c2a05656510b8f8413948d25f3e390432

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html data-ng-app="formSubmit">
+<head>
+<meta charset="ISO-8859-1">
+<title>Searching Solr via Apache Knox Example</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	var app = angular.module('formSubmit', []);
+	
+	app.controller('FormSubmitController',[ '$scope', '$http', function($scope, $http) {
+			
+		$scope.list = [];
+			$scope.headerText = 'Query Solr through Knox';
+			$scope.submit = function() {
+				
+				var solrQuery = $scope.solrQuery;
+				
+				var response = $http.get('search', {params: { solrQuery: solrQuery }});
+				response.success(function(data, status, headers, config) {
+					$scope.list.push(data);
+				});
+				response.error(function(data, status, headers, config) {
+					alert( "Exception details: " + JSON.stringify({data: data}));
+				});
+				
+				//Empty list data after process
+				$scope.list = [];
+				
+			};
+		}]);
+</script>
+</head>
+<body>
+	<form data-ng-submit="submit()" data-ng-controller="FormSubmitController">
+		<h3>{{headerText}}</h3>
+		<p>Query: <input type="text" data-ng-model="solrQuery"></p>
+		<input type="submit" id="submit" value="Submit" /><br>	
+		
+		<h4>You submitted below data through post:</h4>
+		 <pre>Form data ={{list}}</pre>
+	</form>
+</body>
+</html>
