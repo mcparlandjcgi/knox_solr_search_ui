@@ -2,11 +2,20 @@
   "use strict";
 
   var knoxSolrSearch = angular.module('knoxSolrSearch', [
-    'ngResource'
+    'ngRoute'
   ]);
 
   knoxSolrSearch
-    .controller('SearchController', ['$http', function ($http) {
+    .config(function ($routeProvider) {
+      $routeProvider.when('/', {
+        templateUrl: '#',
+        controller: 'SearchController',
+        controllerAs: 'vm'
+      });
+    });
+
+  knoxSolrSearch
+    .controller('SearchController', ['$http', '$route', '$window', function ($http, $route, $window) {
         var vm = this;
         vm.q = "";
 
@@ -25,7 +34,7 @@
       };
 
       vm.refresh = function() {
-        $route.reload();
+        $window.location.reload();
       };
 
     }]);
