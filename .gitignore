@@ -28,4 +28,11 @@ nbdist/
 
 ## Application
 LOGDIR_IS_UNDEFINED
+knox_solr_search_ui.tar.gz
+
+# Bower
+bower_components
+
+# JavaScript
+.tern-project
 
