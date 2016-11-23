@@ -30,7 +30,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -134,8 +133,7 @@ public class SearchController {
 
     // Build the URL and arguments
     final String solrUrl = buildSolrUrl();
-    final MultiValueMap<String, String> solrQueryArgs = extractSolrQueryArgs(solrQuery);
-    addMandatoryArgs(solrQueryArgs);
+    final MultiValueMap<String, String> solrQueryArgs = createSolrQueryArgs(solrQuery);
 
     // Create a URI
     final UriComponents uri =
@@ -158,27 +156,6 @@ public class SearchController {
       logger.error("Error getting Solr Result - http status: {}", solrResult.getStatusCodeValue());
       return "";
     }
-  }
-
-  /**
-   * Extract the solr query arguments.
-   * 
-   * @param solrQuery the solr query the solr query args.
-   * @return a multi value map of query arguments.
-   */
-  protected MultiValueMap<String, String> extractSolrQueryArgs(String solrQuery) {
-    if (StringUtils.isEmpty(solrQuery)) {
-      return null;
-    }
-    // 1. Split mutiple args around ","
-    String[] allArgs = solrQuery.split("&");
-    MultiValueMap<String, String> args = new LinkedMultiValueMap<String, String>();
-    for (final String arg : allArgs) {
-      // 2. Split single arg around "="
-      final String[] splitArgPair = arg.split("=");
-      args.add(splitArgPair[0], splitArgPair[1]);
-    }
-    return args;
   }
 
   /**
@@ -207,14 +184,16 @@ public class SearchController {
   }
 
   /**
-   * Add mandatory arguments
+   * Create the Solr query arguments based on the solr query
    * 
-   * @param args the arguments
+   * @param solrQuery the solr search term
+   * @return a {@link MultiValueMap} of arguments.
    */
-  protected void addMandatoryArgs(MultiValueMap<String, String> args) {
-    if (!args.containsKey("wt")) {
-      args.add("wt", knoxSolrConfig.getSolrFormat());
-    }
+  protected MultiValueMap<String, String> createSolrQueryArgs(final String solrQuery) {
+    final MultiValueMap<String, String> solrQueryArgs = new LinkedMultiValueMap<String, String>();
+    solrQueryArgs.add("q", solrQuery);
+    solrQueryArgs.add("wt", knoxSolrConfig.getSolrFormat());
+    return solrQueryArgs;
   }
 
   /**

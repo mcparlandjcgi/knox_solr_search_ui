@@ -68,18 +68,23 @@ public class SearchControllerTest {
   }
 
   /**
-   * Test method for {@link SearchController#extractSolrQueryArgs(String)}.
+   * Test method for {@link SearchController#createSolrQueryArgs(String)}.
    */
   @Test
-  public void testExtractSolrQueryArgs() {
-    final String solrQuery = "q=*.*&x=y";
+  public void testCreateSolrQueryArgs() {
+    final String solrQuery = "lorem";
+    final String solrFormat = "json";
+
+    final KnoxSolrConfig knoxSolrConfig = mock(KnoxSolrConfig.class);
+    when(knoxSolrConfig.getSolrFormat()).thenReturn(solrFormat);
 
     final SearchController controller = new SearchController();
+    controller.setKnoxSolrConfig(knoxSolrConfig);
 
-    final MultiValueMap<String, String> args = controller.extractSolrQueryArgs(solrQuery);
+    final MultiValueMap<String, String> args = controller.createSolrQueryArgs(solrQuery);
     assertEquals(2, args.size());
-    assertEquals("*.*", args.get("q").iterator().next());
-    assertEquals("y", args.get("x").iterator().next());
+    assertEquals(solrQuery, args.get("q").iterator().next());
+    assertEquals(solrFormat, args.get("wt").iterator().next());
   }
 
   /**
