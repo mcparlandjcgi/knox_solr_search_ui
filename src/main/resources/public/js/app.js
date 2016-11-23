@@ -18,23 +18,24 @@
     .controller('SearchController', ['$http', '$route', '$window', function ($http, $route, $window) {
         var vm = this;
         vm.q = "";
-
-      // var url = "http://hdp24sandbox.ukwest.cloudapp.azure.com:8983/solr/KnoxIntegrationConfig_shard1_replica1/select?q=*%3A*&wt=json&indent=true";
-      //var url = "js/data.json";
-      var url = "/search";
-      $http.get(url)
-      .then(function (response) {
-        vm.products = response.data.response.docs;
-      }, function (response) {
-        console.log('Error: ' + response.error);
-      });
-
+        
       vm.searchSolr = function() {
         vm.q = vm.query;
+        vm.doQuery();
       };
 
       vm.refresh = function() {
         $window.location.reload();
+      };
+      
+      vm.doQuery = function() {
+          var url = "/search?solrQuery=" + vm.query;
+          $http.get(url)
+          .then(function (response) {
+            vm.products = response.data.response.docs;
+          }, function (response) {
+            console.log('Error: ' + response.error);
+          });
       };
 
     }]);
